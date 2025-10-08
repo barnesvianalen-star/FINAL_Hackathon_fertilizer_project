@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ECO Tracker - Transform your food waste into valuable fertilizer with AI-powered analysis. Start your 7-day free trial today!">
+    <title>ECO Tracker - AI-Powered Food Waste to Fertilizer</title>
+    <link rel="canonical" href="https://hackathonecofert.karunya.com">
+    <meta property="og:url" content="https://hackathonecofert.karunya.com">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ECO Tracker - Food Waste to Fertilizer">
+    <meta name="twitter:url" content="https://hackathonecofert.karunya.com">
+    
+    <!-- Styles -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; color: #333; 
+            background: linear-gradient(135deg, #f7f9fc 0%, #eef7e8 50%, #e8f5e8 100%);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        h1, h2, h3 { font-weight: 600; margin-bottom: 1rem; }
+        p { margin-bottom: 1rem; }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed; top: 0; width: 100%; background: rgba(46, 125, 50, 0.95);
+            backdrop-filter: blur(10px); z-index: 1000; box-shadow: 0 2px 20px rgba(46, 125, 50, 0.3);
+        }
+        .nav-container {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 2rem; max-width: 1200px; margin: 0 auto;
+        }
+        .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 700; }
+        .logo-icon { font-size: 2rem; }
+        .logo-text { color: #ffffff; }
+        .nav-menu { display: flex; list-style: none; gap: 2rem; align-items: center; }
+        .nav-link {
+            text-decoration: none; color: #ffffff; font-weight: 500;
+            transition: color 0.3s ease; padding: 0.5rem 1rem;
+        }
+        .nav-link:hover, .nav-link.active { color: #a3d977; }
+        .nav-cta {
+            background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);
+            color: white !important; border-radius: 25px; padding: 12px 24px !important;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(46, 125, 50, 0.4);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c8 50%, #a5d6a7 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect width="1200" height="600" fill="%23e8f5e8"/><path d="M0,400 Q300,350 600,400 T1200,400 L1200,600 L0,600 Z" fill="%23c8e6c8" opacity="0.6"/><circle cx="200" cy="150" r="80" fill="%23ffeb3b" opacity="0.3"/><rect x="100" y="450" width="20" height="100" fill="%232e7d32"/><rect x="300" y="470" width="15" height="80" fill="%232e7d32"/><rect x="500" y="460" width="18" height="90" fill="%232e7d32"/></svg>');
+            background-size: cover; background-position: center;
+            min-height: 100vh; display: flex; align-items: center; padding-top: 100px; position: relative;
+        }
+        .hero-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+            align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+        }
+        .hero-content h1 { 
+            font-size: 3.5rem; margin-bottom: 1.5rem; color: #1f2937;
+            line-height: 1.1;
+        }
+        .highlight {
+            color: #2e7d32; background: linear-gradient(135deg, #2e7d32, #66bb6a);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-description { font-size: 1.2rem; color: #64748b; margin-bottom: 2rem; }
+        .hero-stats {
+            display: flex; gap: 2rem; margin-bottom: 2rem;
+        }
+        .hero-stat {
+            text-align: center;
+        }
+        .hero-stat-number {
+            font-size: 2rem; font-weight: 700; color: #2e7d32;
+        }
+        .hero-stat-label {
+            font-size: 0.9rem; color: #64748b;
+        }
+        .hero-buttons { display: flex; gap: 1rem; margin-bottom: 3rem; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem; padding: 18px 36px;
+            border: none; border-radius: 12px; text-decoration: none; font-weight: 700;
+            cursor: pointer; transition: all 0.3s ease; text-transform: uppercase;
+            letter-spacing: 1px; font-size: 16px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%); color: white;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px); box-shadow: 0 8px 25px rgba(46, 125, 50, 0.4);
+        }
+        .btn-secondary {
+            background: transparent; color: #2e7d32; border: 2px solid #2e7d32;
+        }
+        .btn-secondary:hover { background: #2e7d32; color: white; }
+
+        .trial-badge {
+            background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+            color: white; padding: 8px 16px; border-radius: 20px; font-size: 12px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            display: inline-block; margin-bottom: 20px; animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* ===== PHONE MOCKUP ===== */
+        .phone-mockup {
+            width: 300px; height: 600px; background: linear-gradient(145deg, #1f2937, #374151);
+            border-radius: 40px; padding: 20px; margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); position: relative;
+        }
+        .phone-mockup::before {
+            content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+            width: 60px; height: 6px; background: #4b5563; border-radius: 3px;
+        }
+        .phone-screen {
+            width: 100%; height: 100%; background: #ffffff; border-radius: 25px; overflow: hidden;
+        }
+        .app-preview {
+            padding: 30px 20px; height: 100%; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+        .app-header { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; }
+        .app-logo { font-size: 2rem; }
+        .app-name { font-size: 1.2rem; font-weight: 700; color: #16a34a; }
+
+        /* ===== PRICING SECTION ===== */
+        .pricing {
+            padding: 120px 0; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2.5rem; color: #1f2937; }
+        .section-header p { font-size: 1.2rem; color: #64748b; max-width: 600px; margin: 0 auto; }
+
+        .pricing-toggle {
+            display: flex; justify-content: center; margin-bottom: 3rem;
+        }
+        .toggle-container {
+            background: #e5e7eb; border-radius: 50px; padding: 4px; display: flex;
+        }
+        .toggle-btn {
+            padding: 12px 24px; border-radius: 50px; background: none; border: none;
+            cursor: pointer; transition: all 0.3s ease; font-weight: 600;
+        }
+        .toggle-btn.active {
+            background: linear-gradient(135deg, #2e7d32, #66bb6a); color: white;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .pricing-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem; max-width: 1200px; margin: 0 auto;
+        }
+        .pricing-card {
+            background: white; border-radius: 20px; padding: 40px 30px; position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .pricing-card:hover { transform: translateY(-10px); }
+        .pricing-card.popular {
+            border-color: #2e7d32; transform: scale(1.05);
+        }
+        .popular-badge {
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, #2e7d32, #66bb6a); color: white;
+            padding: 8px 24px; border-radius: 25px; font-size: 12px;
+            font-weight: 700; text-transform: uppercase;
+        }
+        .plan-name { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
+        .plan-price { font-size: 3rem; font-weight: 700; color: #2e7d32; margin-bottom: 5px; }
+        .plan-period { color: #64748b; margin-bottom: 30px; }
+        .plan-features {
+            list-style: none; margin-bottom: 40px;
+        }
+        .plan-features li {
+            display: flex; align-items: center; gap: 10px; padding: 10px 0;
+            color: #374151;
+        }
+        .plan-features .check { color: #22c55e; font-weight: 700; }
+        .plan-features .cross { color: #ef4444; }
+        .plan-btn {
+            width: 100%; padding: 18px; border: none; border-radius: 12px;
+            font-weight: 700; cursor: pointer; transition: all 0.3s ease;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .plan-btn.primary {
+            background: linear-gradient(135deg, #2e7d32, #66bb6a); color: white;
+        }
+        .plan-btn.secondary {
+            background: rgba(46, 125, 50, 0.1); color: #2e7d32;
+            border: 2px solid rgba(46, 125, 50, 0.2);
+        }
+        .plan-btn:hover { transform: translateY(-2px); }
+
+        /* ===== FEATURES SECTION ===== */
+        .features {
+            padding: 120px 0; background: white;
+        }
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;
+        }
+        .feature-card {
+            text-align: center; padding: 2rem;
+        }
+        .feature-icon {
+            font-size: 3rem; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            width: 80px; height: 80px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; margin: 0 auto 1.5rem;
+        }
+        .feature-title { font-size: 1.3rem; margin-bottom: 1rem; color: #1f2937; }
+        .feature-description { color: #64748b; }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            padding: 120px 0; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        .testimonials-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;
+        }
+        .testimonial-card {
+            background: white; border-radius: 20px; padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .testimonial-content {
+            margin-bottom: 1.5rem; font-style: italic; color: #64748b;
+        }
+        .testimonial-author {
+            display: flex; align-items: center; gap: 1rem;
+        }
+        .author-avatar {
+            width: 50px; height: 50px; border-radius: 50%;
+            background: linear-gradient(135deg, #2e7d32, #66bb6a);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 700;
+        }
+        .author-info h4 { margin-bottom: 5px; }
+        .author-info p { color: #64748b; font-size: 14px; }
+
+        /* ===== CTA SECTION ===== */
+        .cta {
+            background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);
+            padding: 80px 0; text-align: center; color: white;
+        }
+        .cta h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .cta p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+        .cta .btn-secondary {
+            background: white; color: #2e7d32; border: none;
+        }
+        .cta .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #1f2937; color: #e5e7eb; padding: 60px 0 20px;
+        }
+        .footer-content {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem;
+        }
+        .footer-logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+        .footer-description { color: #9ca3af; margin-bottom: 2rem; }
+        .footer-section h4 { margin-bottom: 1rem; font-size: 1.1rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section li { margin-bottom: 0.5rem; }
+        .footer-section a { color: #9ca3af; text-decoration: none; transition: color 0.3s ease; }
+        .footer-section a:hover { color: #66bb6a; }
+        .footer-bottom {
+            border-top: 1px solid #374151; padding-top: 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            display: flex; align-items: center; justify-content: center;
+            width: 40px; height: 40px; background: #374151; border-radius: 50%;
+            color: #9ca3af; text-decoration: none; transition: all 0.3s ease;
+        }
+        .social-links a:hover { background: #66bb6a; color: white; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-stats { justify-content: center; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .footer-bottom { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🌱</span>
+                <span class="logo-text">ECO Tracker</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                <li><a href="auth.html" class="nav-link">Login</a></li>
+                <li><a href="auth.html" class="nav-link nav-cta">Sign Up Free</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="trial-badge">🎉 7-Day Free Trial - No Credit Card Required!</div>
+                <h1>Transform <span class="highlight">Food Waste</span> into Valuable <span class="highlight">Fertilizer</span></h1>
+                <p class="hero-description">
+                    Revolutionary AI-powered platform that analyzes your food waste and calculates precise fertilizer potential. 
+                    Reduce waste, boost sustainability, and optimize your agricultural management.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">85%</div>
+                        <div class="hero-stat-label">Waste Reduction</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">50+</div>
+                        <div class="hero-stat-label">Nutrients Tracked</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">10K+</div>
+                        <div class="hero-stat-label">Users Worldwide</div>
+                    </div>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="auth.html" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Start Free Trial
+                    </a>
+                    <a href="app.html" class="btn btn-secondary">
+                        <i class="fas fa-play"></i>
+                        Try Demo
+                    </a>
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <p style="color: #64748b; font-size: 14px; margin-bottom: 10px;">Or continue with:</p>
+                    <button onclick="window.location.href='auth.html'" style="background: white; border: 2px solid #e5e7eb; color: #374151; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px;" 
+                            onmouseover="this.style.borderColor='#4285f4'; this.style.transform='translateY(-1px)'" 
+                            onmouseout="this.style.borderColor='#e5e7eb'; this.style.transform='translateY(0)'">
+                        <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                            <g fill="none" fill-rule="evenodd">
+                                <path d="M17.64 9.205c0-.639-.057-1.252-.164-1.841H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+                                <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
+                                <path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+                                <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+                            </g>
+                        </svg>
+                        Sign in with Google
+                    </button>
+                </div>
+            </div>
+            
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="app-preview">
+                        <div class="app-header">
+                            <span class="app-logo">🌱</span>
+                            <span class="app-name">ECO Tracker</span>
+                        </div>
+                        <div style="text-align: center; padding: 20px 0;">
+                            <div style="background: #f0f9ff; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                                <i class="fas fa-camera" style="font-size: 2rem; color: #16a34a; margin-bottom: 10px;"></i>
+                                <p style="font-size: 14px; color: #64748b;">Scan Food Waste</p>
+                            </div>
+                            <div style="background: #f0f9ff; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                                <i class="fas fa-flask" style="font-size: 2rem; color: #3b82f6; margin-bottom: 10px;"></i>
+                                <p style="font-size: 14px; color: #64748b;">AI Analysis</p>
+                            </div>
+                            <div style="background: #f0f9ff; border-radius: 15px; padding: 20px;">
+                                <i class="fas fa-seedling" style="font-size: 2rem; color: #f59e0b; margin-bottom: 10px;"></i>
+                                <p style="font-size: 14px; color: #64748b;">Fertilizer Recipe</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Powerful Features for Sustainable Agriculture</h2>
+                <p>Everything you need to transform food waste into valuable agricultural resources</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-camera" style="color: #16a34a;"></i>
+                    </div>
+                    <h3 class="feature-title">AI-Powered Scanning</h3>
+                    <p class="feature-description">Advanced computer vision identifies food types and calculates nutrient composition instantly</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-flask" style="color: #3b82f6;"></i>
+                    </div>
+                    <h3 class="feature-title">Nutrient Analysis</h3>
+                    <p class="feature-description">Detailed NPK analysis with micronutrient breakdown for optimal fertilizer formulation</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line" style="color: #8b5cf6;"></i>
+                    </div>
+                    <h3 class="feature-title">Smart Analytics</h3>
+                    <p class="feature-description">Track waste reduction trends and fertilizer production over time with detailed insights</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-recycle" style="color: #f59e0b;"></i>
+                    </div>
+                    <h3 class="feature-title">Waste Optimization</h3>
+                    <p class="feature-description">Reduce food waste by up to 85% while maximizing agricultural value recovery</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud" style="color: #06b6d4;"></i>
+                    </div>
+                    <h3 class="feature-title">Cloud Sync</h3>
+                    <p class="feature-description">Access your data anywhere with secure cloud synchronization and backup</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt" style="color: #10b981;"></i>
+                    </div>
+                    <h3 class="feature-title">Progressive Web App</h3>
+                    <p class="feature-description">Works seamlessly across all devices with offline functionality and native app experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Choose Your Perfect Plan</h2>
+                <p>Start with our 7-day free trial and upgrade as you grow</p>
+            </div>
+            
+            <div class="pricing-toggle">
+                <div class="toggle-container">
+                    <button class="toggle-btn active">Yearly</button>
+                    <button class="toggle-btn">Lifetime (Save 50%)</button>
+                </div>
+            </div>
+            
+            <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="plan-name">Basic</div>
+                        <div class="plan-price">₹799</div>
+                        <div class="plan-period">per year</div>
+                    <ul class="plan-features">
+                        <li><span class="check">✓</span> 50 food scans per month</li>
+                        <li><span class="check">✓</span> Basic nutrient analysis</li>
+                        <li><span class="check">✓</span> Fertilizer calculator</li>
+                        <li><span class="check">✓</span> Email support</li>
+                        <li><span class="check">✓</span> Mobile web app</li>
+                        <li><span class="cross">✗</span> Advanced analytics</li>
+                        <li><span class="cross">✗</span> API access</li>
+                    </ul>
+                    <button class="plan-btn secondary" onclick="selectPlan('basic')">Start Basic Plan</button>
+                </div>
+                
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="plan-name">Pro</div>
+                        <div class="plan-price">₹1,599</div>
+                        <div class="plan-period">per year</div>
+                    <ul class="plan-features">
+                        <li><span class="check">✓</span> 200 food scans per month</li>
+                        <li><span class="check">✓</span> Advanced nutrient analysis</li>
+                        <li><span class="check">✓</span> Custom fertilizer recipes</li>
+                        <li><span class="check">✓</span> Priority support</li>
+                        <li><span class="check">✓</span> Advanced analytics</li>
+                        <li><span class="check">✓</span> Export reports</li>
+                        <li><span class="cross">✗</span> API access</li>
+                    </ul>
+                    <button class="plan-btn primary" onclick="selectPlan('pro')">Start Pro Plan</button>
+                </div>
+                
+                    <div class="pricing-card">
+                        <div class="plan-name">Premium</div>
+                        <div class="plan-price">₹3,200</div>
+                        <div class="plan-period">per year</div>
+                    <ul class="plan-features">
+                        <li><span class="check">✓</span> Unlimited food scans</li>
+                        <li><span class="check">✓</span> AI-powered insights</li>
+                        <li><span class="check">✓</span> Custom fertilizer recipes</li>
+                        <li><span class="check">✓</span> 24/7 phone support</li>
+                        <li><span class="check">✓</span> Advanced analytics</li>
+                        <li><span class="check">✓</span> API access</li>
+                        <li><span class="check">✓</span> White-label options</li>
+                    </ul>
+                    <button class="plan-btn primary" onclick="selectPlan('premium')">Start Premium Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Loved by Farmers Worldwide</h2>
+                <p>See how ECO Tracker is transforming agricultural practices</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "ECO Tracker has revolutionized how we manage food waste on our farm. We've reduced waste by 75% while creating our own high-quality fertilizer. The ROI is incredible!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h4>Sarah Martinez</h4>
+                            <p>Organic Farm Owner, California</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The AI analysis is spot-on! It accurately identifies nutrients and gives us precise fertilizer recipes. Our crop yields have increased by 30% since we started using ECO Tracker."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JK</div>
+                        <div class="author-info">
+                            <h4>James Kumar</h4>
+                            <p>Agricultural Consultant, Texas</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Simple to use, powerful results. The app interface is intuitive and the analytics help us make data-driven decisions. Best investment we've made for our sustainability goals."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EJ</div>
+                        <div class="author-info">
+                            <h4>Emily Johnson</h4>
+                            <p>Sustainable Agriculture Director, Oregon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Food Waste?</h2>
+            <p>Join thousands of farmers already using ECO Tracker to reduce waste and boost sustainability</p>
+            <a href="auth.html" class="btn btn-secondary">
+                <i class="fas fa-rocket"></i>
+                Start Your Free 7-Day Trial
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <span>🌱</span>
+                        <span>ECO Tracker</span>
+                    </div>
+                    <p class="footer-description">
+                        Transform your food waste into valuable fertilizer with AI-powered analysis. 
+                        Reduce waste, boost sustainability, and optimize your agricultural management.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="app.html">Demo</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="admin-login.html" style="color: #64748b; opacity: 0.7;">Admin Login</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ECO Tracker. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Pricing toggle
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update pricing (would implement actual price changes here)
+                const isLifetime = this.textContent.includes('Lifetime');
+                document.querySelectorAll('.plan-price').forEach((price, index) => {
+                    const yearlyPrices = ['₹799', '₹1,599', '₹3,200'];
+                    const lifetimePrices = ['₹399', '₹799', '₹1,600']; // 50% discount
+                    price.textContent = isLifetime ? lifetimePrices[index] : yearlyPrices[index];
+                });
+                
+                document.querySelectorAll('.plan-period').forEach(period => {
+                    period.textContent = isLifetime ? 'one-time payment' : 'per year';
+                });
+            });
+        });
+
+        // Plan selection
+        function selectPlan(plan) {
+            localStorage.setItem('selectedPlan', plan);
+            window.location.href = 'auth.html';
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(46, 125, 50, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(46, 125, 50, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>

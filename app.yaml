@@ -1,0 +1,90 @@
+# Google App Engine configuration for ECO Tracker
+runtime: python39
+service: default
+
+# Static file handlers for the web application
+handlers:
+# Handle the main pages
+- url: /
+  static_files: index.html
+  upload: index.html
+
+- url: /landing.html
+  static_files: landing.html
+  upload: landing.html
+
+- url: /auth.html
+  static_files: auth.html
+  upload: auth.html
+
+- url: /dashboard.html
+  static_files: dashboard.html
+  upload: dashboard.html
+
+- url: /app.html
+  static_files: app.html
+  upload: app.html
+
+- url: /admin.html
+  static_files: admin.html
+  upload: admin.html
+
+- url: /admin-login.html
+  static_files: admin-login.html
+  upload: admin-login.html
+
+# Handle JavaScript files
+- url: /database.js
+  static_files: database.js
+  upload: database.js
+  mime_type: application/javascript
+
+- url: /google-oauth.js
+  static_files: google-oauth.js
+  upload: google-oauth.js
+  mime_type: application/javascript
+
+# Handle PWA files
+- url: /manifest.json
+  static_files: manifest.json
+  upload: manifest.json
+  mime_type: application/json
+
+- url: /sw.js
+  static_files: sw.js
+  upload: sw.js
+  mime_type: application/javascript
+
+# Handle documentation files
+- url: /README.md
+  static_files: README.md
+  upload: README.md
+  mime_type: text/plain
+
+- url: /GOOGLE_OAUTH_SETUP.md
+  static_files: GOOGLE_OAUTH_SETUP.md
+  upload: GOOGLE_OAUTH_SETUP.md
+  mime_type: text/plain
+
+- url: /WEBSITE_SUMMARY.md
+  static_files: WEBSITE_SUMMARY.md
+  upload: WEBSITE_SUMMARY.md
+  mime_type: text/plain
+
+# Handle all other static files
+- url: /(.*)
+  static_files: \1
+  upload: .*
+
+# Environment variables (optional)
+env_variables:
+  NODE_ENV: production
+  
+# Automatic scaling configuration (free tier friendly)
+automatic_scaling:
+  min_instances: 0
+  max_instances: 1
+  target_cpu_utilization: 0.6
+
+# Instance class (free tier)
+instance_class: F1

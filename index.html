@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ECO Tracker - Transform your food waste into valuable fertilizer with AI-powered analysis. Start your 7-day free trial today!">
+    <title>ECO Tracker - AI-Powered Food Waste to Fertilizer</title>
+    <script>
+        // Redirect to new landing page
+        window.location.href = 'landing.html';
+    </script>
+    <link rel="canonical" href="https://hackathonecofert.karunya.com">
+    <meta property="og:url" content="https://hackathonecofert.karunya.com">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ECO Tracker - Hackathon EcoFert">
+    <meta name="twitter:url" content="https://hackathonecofert.karunya.com">
+    
+    <!-- Styles -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; color: #333; 
+            background: linear-gradient(135deg, #f7f9fc 0%, #eef7e8 50%, #e8f5e8 100%);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        h1, h2, h3 { font-weight: 600; margin-bottom: 1rem; }
+        p { margin-bottom: 1rem; }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed; top: 0; width: 100%; background: rgba(46, 125, 50, 0.95);
+            backdrop-filter: blur(10px); z-index: 1000; box-shadow: 0 2px 20px rgba(46, 125, 50, 0.3);
+        }
+        .nav-container {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 2rem; max-width: 1200px; margin: 0 auto;
+        }
+        .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 700; }
+        .logo-icon { font-size: 2rem; }
+        .logo-text { color: #ffffff; }
+        .nav-menu { display: flex; list-style: none; gap: 2rem; align-items: center; }
+        .nav-link {
+            text-decoration: none; color: #ffffff; font-weight: 500;
+            transition: color 0.3s ease; padding: 0.5rem 1rem;
+        }
+        .nav-link:hover, .nav-link.active { color: #a3d977; }
+        .nav-link.btn {
+            background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);
+            color: white !important; border-radius: 25px;
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            min-height: 100vh; padding: 120px 0 60px;
+            display: none;
+        }
+        .section.active { display: block; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2.5rem; color: #1f2937; }
+        .section-header p { font-size: 1.2rem; color: #64748b; max-width: 600px; margin: 0 auto; }
+
+        /* ===== HOME SECTION ===== */
+        .home {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c8 50%, #a5d6a7 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect width="1200" height="600" fill="%23e8f5e8"/><path d="M0,400 Q300,350 600,400 T1200,400 L1200,600 L0,600 Z" fill="%23c8e6c8" opacity="0.6"/><circle cx="200" cy="150" r="80" fill="%23ffeb3b" opacity="0.3"/><rect x="100" y="450" width="20" height="100" fill="%232e7d32"/><rect x="300" y="470" width="15" height="80" fill="%232e7d32"/><rect x="500" y="460" width="18" height="90" fill="%232e7d32"/></svg>');
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; padding-top: 100px; position: relative;
+        }
+        .hero-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+            align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+        }
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 1.5rem; color: #1f2937; }
+        .highlight {
+            color: #2e7d32; background: linear-gradient(135deg, #2e7d32, #66bb6a);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-description { font-size: 1.2rem; color: #64748b; margin-bottom: 2rem; }
+        .hero-buttons { display: flex; gap: 1rem; margin-bottom: 3rem; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem; padding: 15px 30px;
+            border: none; border-radius: 12px; text-decoration: none; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease; text-transform: uppercase;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%); color: white;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px); box-shadow: 0 8px 25px rgba(46, 125, 50, 0.4);
+        }
+        .btn-secondary {
+            background: transparent; color: #2e7d32; border: 2px solid #2e7d32;
+        }
+        .btn-secondary:hover { background: #2e7d32; color: white; }
+
+        /* ===== PHONE MOCKUP ===== */
+        .phone-mockup {
+            width: 300px; height: 600px; background: linear-gradient(145deg, #1f2937, #374151);
+            border-radius: 40px; padding: 20px; margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); position: relative;
+        }
+        .phone-mockup::before {
+            content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+            width: 60px; height: 6px; background: #4b5563; border-radius: 3px;
+        }
+        .phone-screen {
+            width: 100%; height: 100%; background: #ffffff; border-radius: 25px; overflow: hidden;
+        }
+        .app-preview {
+            padding: 30px 20px; height: 100%; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+        .app-header { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; }
+        .app-logo { font-size: 2rem; }
+        .app-name { font-size: 1.2rem; font-weight: 700; color: #16a34a; }
+
+        /* ===== DOWNLOAD SECTION ===== */
+        .download-card {
+            background: white; border-radius: 20px; padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); text-align: center; margin: 2rem 0;
+        }
+        .download-main-btn {
+            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%); color: white;
+            border: none; border-radius: 20px; padding: 20px 40px; font-size: 1.3rem;
+            font-weight: 700; cursor: pointer; box-shadow: 0 8px 25px rgba(22, 163, 74, 0.3);
+            transition: all 0.3s ease; text-transform: uppercase; width: 100%; max-width: 400px;
+        }
+        .download-main-btn:hover {
+            transform: translateY(-3px); box-shadow: 0 12px 35px rgba(22, 163, 74, 0.4);
+        }
+        .qr-section { margin: 2rem 0; }
+        .qr-code {
+            background: white; padding: 20px; border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); display: inline-block;
+        }
+
+        /* ===== GRAPHICS GENERATOR ===== */
+        .graphics-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 2rem 0;
+        }
+        .graphic-section { text-align: center; }
+        .graphic-title {
+            font-size: 1.8rem; font-weight: 700; margin-bottom: 20px;
+            color: #16a34a; text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .canvas-container {
+            border: 3px dashed #22c55e; border-radius: 16px; padding: 30px;
+            background: linear-gradient(145deg, #f8fafc, #f1f5f9); margin-bottom: 25px;
+        }
+        canvas {
+            border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease; max-width: 100%;
+        }
+        canvas:hover { transform: scale(1.02); }
+
+        /* ===== APP STORE SECTION ===== */
+        .app-showcase {
+            display: flex; align-items: center; gap: 2rem; background: white;
+            border-radius: 20px; padding: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        .app-icon-large {
+            width: 120px; height: 120px;
+            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+            border-radius: 25px; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 25px rgba(22, 163, 74, 0.3); font-size: 4rem;
+        }
+        .app-info h3 { font-size: 2.5rem; margin-bottom: 0.5rem; color: #1f2937; }
+        .app-subtitle { font-size: 1.2rem; color: #64748b; margin-bottom: 1rem; }
+
+        /* ===== FEATURES GRID ===== */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
+        }
+        .feature-card {
+            background: white; padding: 2.5rem; border-radius: 20px; text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;
+        }
+        .feature-card:hover { transform: translateY(-10px); }
+        .feature-icon {
+            font-size: 3rem; margin-bottom: 1rem; background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            width: 80px; height: 80px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; margin: 0 auto 1.5rem;
+        }
+
+        /* ===== PRIVACY SECTION ===== */
+        .privacy-content {
+            max-width: 800px; margin: 0 auto; background: white; padding: 40px;
+            border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .privacy-content h3 { color: #16a34a; margin-top: 2rem; }
+        .privacy-content ul { margin-left: 20px; color: #64748b; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #1f2937; color: #e5e7eb; padding: 60px 0 20px; margin-top: 4rem;
+        }
+        .footer-content {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem;
+        }
+        .footer-logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #374151; color: #9ca3af; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .graphics-grid { grid-template-columns: 1fr; }
+            .app-showcase { flex-direction: column; text-align: center; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .fade-in.active { opacity: 1; transform: translateY(0); }
+
+        /* ===== MODAL ===== */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); z-index: 2000; backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: white; border-radius: 20px; padding: 2rem; max-width: 500px; width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .modal-close {
+            position: absolute; top: 15px; right: 20px; background: none; border: none;
+            font-size: 2rem; cursor: pointer; color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🚜</span>
+                <span class="logo-text">AgriSmart AI</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" onclick="showSection('home')">Home</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('ai-platform')">AI Platform</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('crop-analysis')">Crop Analysis</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('features')">Features</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('privacy')">Privacy</a></li>
+                <li><a href="#" class="nav-link btn" onclick="window.open('app.html', '_blank')">Launch Platform</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HOME SECTION -->
+    <section id="home" class="section active home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Revolutionize Agriculture with <span class="highlight">AI-Powered Smart Farming</span></h1>
+                <p class="hero-description">Advanced agricultural intelligence platform from Karunya University. Harness the power of artificial intelligence for crop analysis, yield optimization, sustainable farming practices, and precision agriculture management.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="window.open('app.html', '_blank')">
+                        <i class="fas fa-brain"></i>
+                        Launch AI Platform
+                    </button>
+                    <button class="btn btn-secondary" onclick="showSection('crop-analysis')">
+                        <i class="fas fa-seedling"></i>
+                        Explore Features
+                    </button>
+                </div>
+                <div style="display: flex; gap: 2rem; justify-content: center; margin-top: 2rem;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; font-weight: 700; color: #2e7d32;">50+</div>
+                        <div style="font-size: 0.9rem; color: #64748b; text-transform: uppercase;">Crop Types</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; font-weight: 700; color: #2e7d32;">95%</div>
+                        <div style="font-size: 0.9rem; color: #64748b; text-transform: uppercase;">AI Accuracy</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; font-weight: 700; color: #2e7d32;">24/7</div>
+                        <div style="font-size: 0.9rem; color: #64748b; text-transform: uppercase;">Monitoring</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="app-preview">
+                            <div class="app-header">
+                                <span class="app-logo">🌱</span>
+                                <span class="app-name">ECO Tracker</span>
+                            </div>
+                            <div style="text-align: center; background: white; border-radius: 20px; padding: 40px 20px; margin-bottom: 30px;">
+                                <div style="font-size: 3rem; margin-bottom: 10px;">📱</div>
+                                <p>Smart Scanning Ready</p>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 15px;">
+                                <button style="background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 600;">Start Scanning</button>
+                                <button style="background: transparent; color: #16a34a; border: 2px solid #16a34a; padding: 15px; border-radius: 12px; font-weight: 600;">View History</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI PLATFORM SECTION -->
+    <section id="ai-platform" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>AgriSmart AI Platform</h2>
+                <p>Intelligent agricultural management powered by advanced machine learning and computer vision</p>
+            </div>
+
+            <!-- AI Platform Showcase -->
+            <div class="app-showcase">
+                <div class="app-icon-large" style="background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);">🧠</div>
+                <div class="app-info">
+                    <h3>AgriSmart AI</h3>
+                    <p class="app-subtitle">Next-Generation Smart Farming Intelligence</p>
+                    <div style="background: linear-gradient(135deg, #e8f5e8, #c8e6c8); padding: 15px 20px; border-radius: 12px; margin-bottom: 1rem; display: inline-block;">
+                        <span style="color: #2e7d32; font-weight: 600;">🏆 Hackathon Project - Karunya University Agricultural Innovation</span>
+                    </div>
+                    <div style="display: flex; gap: 2rem;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.2rem; font-weight: 700; color: #2e7d32;">AI-Powered</div>
+                            <div style="font-size: 0.9rem; color: #64748b;">Machine Learning</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.2rem; font-weight: 700; color: #2e7d32;">Cloud-Based</div>
+                            <div style="font-size: 0.9rem; color: #64748b;">Real-time Analysis</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.2rem; font-weight: 700; color: #2e7d32;">v2.0</div>
+                            <div style="font-size: 0.9rem; color: #64748b;">Latest AI Model</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platform Access -->
+            <div class="download-card">
+                <h2 style="color: #1f2937; margin-bottom: 1rem;">Ready to Revolutionize Your Farming?</h2>
+                <p style="color: #64748b; margin-bottom: 3rem;">Access our AI-powered agricultural platform and transform your farming operations with intelligent crop analysis and precision agriculture.</p>
+                
+                <button class="download-main-btn" onclick="window.open('app.html', '_blank')" style="background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%); width: 100%; max-width: 500px;">
+                    <i class="fas fa-brain" style="margin-right: 10px;"></i>
+                    Launch AI Platform
+                    <div style="font-size: 0.9rem; opacity: 0.9; margin-top: 5px;">Instant Access • AI-Powered Analysis • Smart Recommendations</div>
+                </button>
+
+                <!-- Agricultural Features Gallery -->
+                <div style="margin-top: 3rem;">
+                    <h3 style="color: #1f2937; margin-bottom: 1.5rem;">Agricultural AI Features</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                        <div style="background: linear-gradient(135deg, #e8f5e8, #c8e6c8); padding: 20px; border-radius: 15px; text-align: center;">
+                            <div style="font-size: 3rem; margin-bottom: 10px;">🌾</div>
+                            <h4 style="color: #2e7d32; margin-bottom: 10px;">Crop Health Analysis</h4>
+                            <p style="color: #64748b; font-size: 0.9rem;">AI-powered disease detection and health monitoring</p>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #e8f5e8, #c8e6c8); padding: 20px; border-radius: 15px; text-align: center;">
+                            <div style="font-size: 3rem; margin-bottom: 10px;">🚁</div>
+                            <h4 style="color: #2e7d32; margin-bottom: 10px;">Drone Integration</h4>
+                            <p style="color: #64748b; font-size: 0.9rem;">Aerial crop monitoring and precision mapping</p>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #e8f5e8, #c8e6c8); padding: 20px; border-radius: 15px; text-align: center;">
+                            <div style="font-size: 3rem; margin-bottom: 10px;">💧</div>
+                            <h4 style="color: #2e7d32; margin-bottom: 10px;">Smart Irrigation</h4>
+                            <p style="color: #64748b; font-size: 0.9rem;">Automated water management and optimization</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CROP ANALYSIS SECTION -->
+    <section id="crop-analysis" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>AI-Powered Crop Analysis</h2>
+                <p>Advanced computer vision and machine learning for precision agriculture</p>
+            </div>
+
+            <!-- Analysis Demo Grid -->
+            <div class="graphics-grid">
+                <div class="graphic-section">
+                    <div class="graphic-title">🌿 Crop Health Scanner</div>
+                    <div class="canvas-container" style="background: linear-gradient(145deg, #e8f5e8, #c8e6c8);">
+                        <div style="width: 300px; height: 300px; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><rect width="300" height="300" fill="%23e8f5e8"/><circle cx="150" cy="150" r="120" fill="%2366bb6a" opacity="0.3"/><rect x="120" y="200" width="60" height="80" fill="%232e7d32" rx="5"/><circle cx="130" cy="180" r="8" fill="%234caf50"/><circle cx="170" cy="185" r="6" fill="%234caf50"/><circle cx="150" cy="160" r="10" fill="%234caf50"/><path d="M80,250 Q120,200 160,250 Q200,300 240,250" stroke="%232e7d32" stroke-width="3" fill="none"/><text x="150" y="50" text-anchor="middle" fill="%232e7d32" font-size="16" font-weight="bold">Healthy Crop Detected</text></svg>') center/cover; border-radius: 15px; display: flex; align-items: center; justify-content: center;">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="simulateCropAnalysis()">
+                        <i class="fas fa-microscope"></i> Analyze Crop Health
+                    </button>
+                    <div style="color: #64748b; margin-top: 15px;">
+                        AI Detection • 95% Accuracy<br><strong>Disease & Pest Identification</strong>
+                    </div>
+                </div>
+                
+                <div class="graphic-section">
+                    <div class="graphic-title">🚁 Drone Field Mapping</div>
+                    <div class="canvas-container" style="background: linear-gradient(145deg, #fff3e0, #ffcc02);">
+                        <div style="width: 400px; height: 195px; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 195"><rect width="400" height="195" fill="%23fff3e0"/><rect x="20" y="40" width="80" height="60" fill="%2366bb6a" opacity="0.7" rx="5"/><rect x="120" y="30" width="90" height="70" fill="%234caf50" opacity="0.8" rx="5"/><rect x="230" y="35" width="75" height="65" fill="%23388e3c" opacity="0.6" rx="5"/><rect x="325" y="45" width="60" height="55" fill="%232e7d32" opacity="0.9" rx="5"/><rect x="50" y="130" width="70" height="40" fill="%23ffb74d" opacity="0.5" rx="3"/><rect x="150" y="120" width="80" height="50" fill="%23ff9800" opacity="0.6" rx="3"/><rect x="260" y="125" width="65" height="45" fill="%23f57c00" opacity="0.7" rx="3"/><circle cx="360" cy="25" r="15" fill="%23424242"/><text x="200" y="15" text-anchor="middle" fill="%23424242" font-size="12" font-weight="bold">Field Productivity Map</text></svg>') center/cover; border-radius: 15px;">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="generateFieldMap()">
+                        <i class="fas fa-map"></i> Generate Field Map
+                    </button>
+                    <div style="color: #64748b; margin-top: 15px;">
+                        Precision Mapping • GPS Integration<br><strong>Yield Optimization Analysis</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Analysis Features -->
+            <div style="background: linear-gradient(145deg, #e8f5e8, #c8e6c8); border: 2px solid #66bb6a; border-radius: 16px; padding: 30px; margin-top: 40px;">
+                <h3 style="color: #2e7d32; margin-bottom: 15px;">🧠 AI Analysis Capabilities</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div>
+                        <h4 style="color: #2e7d32; margin-bottom: 10px;">🌱 Plant Disease Detection</h4>
+                        <ul style="margin-left: 20px; color: #64748b;">
+                            <li>Early disease identification</li>
+                            <li>Pest infestation alerts</li>
+                            <li>Treatment recommendations</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #2e7d32; margin-bottom: 10px;">📈 Yield Prediction</h4>
+                        <ul style="margin-left: 20px; color: #64748b;">
+                            <li>Harvest time optimization</li>
+                            <li>Production forecasting</li>
+                            <li>Market timing analysis</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #2e7d32; margin-bottom: 10px;">💧 Resource Optimization</h4>
+                        <ul style="margin-left: 20px; color: #64748b;">
+                            <li>Water usage efficiency</li>
+                            <li>Fertilizer recommendations</li>
+                            <li>Irrigation scheduling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Smart Agriculture Ecosystem</h2>
+                <p>Comprehensive AI-powered platform for modern sustainable farming</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #e8f5e8, #c8e6c8); color: #2e7d32;">🧠</div>
+                    <h3>AI-Powered Analysis</h3>
+                    <p>Advanced machine learning algorithms for crop health detection, disease identification, and yield prediction with 95% accuracy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #e8f5e8, #c8e6c8); color: #2e7d32;">🚁</div>
+                    <h3>Drone Integration</h3>
+                    <p>Seamless UAV connectivity for aerial crop monitoring, field mapping, and precision agriculture applications.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #e8f5e8, #c8e6c8); color: #2e7d32;">📊</div>
+                    <h3>Smart Analytics Dashboard</h3>
+                    <p>Real-time agricultural insights with weather integration, soil analysis, and predictive farming recommendations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #e8f5e8, #c8e6c8); color: #2e7d32;">💧</div>
+                    <h3>Irrigation Management</h3>
+                    <p>Automated water management system with soil moisture sensors and weather-based irrigation scheduling.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #e8f5e8, #c8e6c8); color: #2e7d32;">🌱</div>
+                    <h3>Crop Lifecycle Tracking</h3>
+                    <p>Complete farm management from seed to harvest with growth stage monitoring and optimal timing alerts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #e8f5e8, #c8e6c8); color: #2e7d32;">🌍</div>
+                    <h3>Sustainable Practices</h3>
+                    <p>Eco-friendly farming recommendations, carbon footprint tracking, and organic certification support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIVACY SECTION -->
+    <section id="privacy" class="section">
+        <div class="container">
+            <div class="privacy-content">
+                <h2 style="color: #16a34a;">Privacy Policy</h2>
+                <p style="color: #64748b;"><strong>Effective Date:</strong> October 2025</p>
+
+                <h3>Privacy-First Design</h3>
+                <p>ECO Tracker is designed with privacy as a core principle. We believe your data should stay with you.</p>
+
+                <h3>What We Collect</h3>
+                <ul>
+                    <li><strong>Minimal Data:</strong> Only anonymous usage statistics to improve performance</li>
+                    <li><strong>Local Processing:</strong> All scanning happens on your device</li>
+                    <li><strong>No Personal Info:</strong> We don't collect names, emails, or identifiers</li>
+                </ul>
+
+                <h3>Your Data Rights</h3>
+                <ul>
+                    <li><strong>Complete Control:</strong> All data stored locally on your device</li>
+                    <li><strong>Easy Deletion:</strong> Uninstall the app to remove all data</li>
+                    <li><strong>No Tracking:</strong> We don't track your location or behavior</li>
+                </ul>
+
+                <h3>Permissions Explained</h3>
+                <div style="background: #f0f9ff; padding: 20px; border-radius: 15px; margin: 20px 0;">
+                    <p><strong>Camera:</strong> Used only for food scanning (processed locally)</p>
+                    <p><strong>Storage:</strong> Saves your tracking data on your device</p>
+                    <p><strong>Internet:</strong> Optional features and updates (app works offline)</p>
+                </div>
+
+                <div style="background: #16a34a; color: white; padding: 20px; border-radius: 15px; margin-top: 30px;">
+                    <h3 style="color: white;">Contact Us</h3>
+                    <p><strong>Email:</strong> privacy@ecotracker.com</p>
+                    <p><strong>Response Time:</strong> Within 48 hours</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <span class="logo-icon">🚜</span>
+                        <span class="logo-text">AgriSmart AI</span>
+                    </div>
+                    <p style="margin-bottom: 2rem;">Revolutionary agricultural intelligence platform from Karunya University. Empowering farmers with AI-driven insights for sustainable, profitable, and environmentally conscious farming practices.</p>
+                </div>
+                <div>
+                    <h4 style="color: white; margin-bottom: 1rem;">Platform</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.5rem;"><a href="#" onclick="window.open('app.html', '_blank')" style="color: #e5e7eb; text-decoration: none;">Launch AI Platform</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" onclick="showSection('features')" style="color: #e5e7eb; text-decoration: none;">Features</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" onclick="showSection('privacy')" style="color: #e5e7eb; text-decoration: none;">Privacy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: white; margin-bottom: 1rem;">AI Tools</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.5rem;"><a href="#" onclick="showSection('crop-analysis')" style="color: #e5e7eb; text-decoration: none;">Crop Analysis</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" onclick="showSection('ai-platform')" style="color: #e5e7eb; text-decoration: none;">AI Platform</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: white; margin-bottom: 1rem;">Connect</h4>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: #e5e7eb; font-size: 1.5rem;"><i class="fab fa-github"></i></a>
+                        <a href="#" style="color: #e5e7eb; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #e5e7eb; font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AgriSmart AI - Agricultural Intelligence Platform | Karunya University | Revolutionizing farming through artificial intelligence and sustainable technology.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Download Modal -->
+    <div id="downloadModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeDownloadModal()">&times;</button>
+            <div style="text-align: center;">
+                <div style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 2rem;">📱</div>
+                <h3 style="margin-bottom: 1rem;">Download Starting...</h3>
+                <p style="color: #64748b; margin-bottom: 2rem;">Your ECO Tracker APK is downloading...</p>
+                <div style="background: #f1f5f9; border-radius: 10px; padding: 1.5rem;">
+                    <p><strong>File:</strong> EcoScan-v1.0.0-production.apk</p>
+                    <p><strong>Size:</strong> 1.53 KB</p>
+                    <p><strong>Safe & Secure:</strong> Digitally signed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
+    <script>
+        // Section Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Graphics Generation
+        function createAppIcon() {
+            const canvas = document.getElementById('iconCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            ctx.clearRect(0, 0, 512, 512);
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, 512, 512);
+            gradient.addColorStop(0, '#22c55e');
+            gradient.addColorStop(1, '#16a34a');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 512, 512);
+            
+            // Plant emoji
+            ctx.font = '200px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🌱', 256, 180);
+            
+            // App name
+            ctx.font = 'bold 48px Arial';
+            ctx.fillText('ECO Tracker', 256, 350);
+        }
+        
+        function createFeatureGraphic() {
+            const canvas = document.getElementById('featureCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            ctx.clearRect(0, 0, 1024, 500);
+            
+            // Background
+            const gradient = ctx.createLinearGradient(0, 0, 1024, 500);
+            gradient.addColorStop(0, '#f0f9ff');
+            gradient.addColorStop(0.5, '#e0f2fe');
+            gradient.addColorStop(1, '#cffafe');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1024, 500);
+            
+            // Icon
+            const iconGradient = ctx.createLinearGradient(50, 100, 200, 250);
+            iconGradient.addColorStop(0, '#22c55e');
+            iconGradient.addColorStop(1, '#16a34a');
+            ctx.fillStyle = iconGradient;
+            ctx.fillRect(50, 100, 150, 150);
+            
+            // Text
+            ctx.font = 'bold 72px Arial';
+            ctx.fillStyle = '#16a34a';
+            ctx.textAlign = 'left';
+            ctx.fillText('ECO Tracker', 250, 180);
+            
+            ctx.font = '36px Arial';
+            ctx.fillStyle = '#64748b';
+            ctx.fillText('Food to Fertilizer Revolution', 250, 230);
+        }
+
+        // Download functions
+        function downloadIcon() {
+            const canvas = document.getElementById('iconCanvas');
+            const link = document.createElement('a');
+            link.download = 'eco-tracker-icon-512x512.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            showNotification('App icon downloaded successfully!', 'success');
+        }
+        
+        function downloadFeature() {
+            const canvas = document.getElementById('featureCanvas');
+            const link = document.createElement('a');
+            link.download = 'eco-tracker-feature-1024x500.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            showNotification('Feature graphic downloaded successfully!', 'success');
+        }
+
+        // Agricultural AI Functions
+        function simulateCropAnalysis() {
+            showNotification('Analyzing crop health with AI...', 'info');
+            
+            setTimeout(() => {
+                const results = [
+                    '🌿 Crop Health: 92% - Excellent condition',
+                    '🐛 No pest infestation detected',
+                    '💧 Soil moisture: Optimal (65%)',
+                    '🌡️ Growth stage: Vegetative - Day 45'
+                ];
+                
+                let resultHTML = '<div style="background: #e8f5e8; padding: 20px; border-radius: 10px; margin: 20px 0;"><h4 style="color: #2e7d32;">AI Analysis Results:</h4><ul>';
+                results.forEach(result => {
+                    resultHTML += `<li style="margin: 10px 0; color: #2e7d32;">${result}</li>`;
+                });
+                resultHTML += '</ul></div>';
+                
+                const notification = document.createElement('div');
+                notification.innerHTML = resultHTML;
+                notification.style.cssText = `
+                    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    background: white; border-radius: 15px; padding: 20px; z-index: 2000;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.3); max-width: 400px;
+                `;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => notification.remove(), 5000);
+            }, 2000);
+        }
+        
+        function generateFieldMap() {
+            showNotification('Generating precision field map...', 'info');
+            
+            setTimeout(() => {
+                const mapData = [
+                    '📍 Field area: 12.5 hectares mapped',
+                    '🌾 Crop density: 85% coverage',
+                    '💰 Yield prediction: 4.2 tons/hectare',
+                    '⚠️ Attention needed: North-east section'
+                ];
+                
+                let mapHTML = '<div style="background: #fff3e0; padding: 20px; border-radius: 10px; margin: 20px 0;"><h4 style="color: #f57c00;">Field Mapping Complete:</h4><ul>';
+                mapData.forEach(data => {
+                    mapHTML += `<li style="margin: 10px 0; color: #f57c00;">${data}</li>`;
+                });
+                mapHTML += '</ul></div>';
+                
+                const mapNotification = document.createElement('div');
+                mapNotification.innerHTML = mapHTML;
+                mapNotification.style.cssText = `
+                    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    background: white; border-radius: 15px; padding: 20px; z-index: 2000;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.3); max-width: 400px;
+                `;
+                document.body.appendChild(mapNotification);
+                
+                setTimeout(() => mapNotification.remove(), 5000);
+            }, 2500);
+        }
+        
+        // Legacy download function (now redirects to web app)
+        function startDownload() {
+            window.open('app.html', '_blank');
+            
+            // Simulate download
+            setTimeout(() => {
+                // Create download link for the APK
+                const link = document.createElement('a');
+                link.href = './EcoScan-v1.0.0-production.apk';
+                link.download = 'EcoScan-v1.0.0-production.apk';
+                link.click();
+                
+                closeDownloadModal();
+                showNotification('APK download started! Check your downloads folder.', 'success');
+            }, 2000);
+        }
+
+        function closeDownloadModal() {
+            document.getElementById('downloadModal').style.display = 'none';
+        }
+
+        // Utility functions
+        function copyDownloadLink() {
+            const url = window.location.hostname === 'localhost' ? 
+                'https://hackathonecofert.karunya.com' : 
+                window.location.href + '#download';
+            navigator.clipboard.writeText(url).then(() => {
+                showNotification('Download link copied to clipboard!', 'success');
+            });
+        }
+
+        function shareApp() {
+            const shareUrl = window.location.hostname === 'localhost' ? 
+                'https://hackathonecofert.karunya.com' : 
+                window.location.href;
+                
+            if (navigator.share) {
+                navigator.share({
+                    title: 'ECO Tracker - Hackathon EcoFert Project',
+                    text: 'Transform your food waste into eco-friendly fertilizer! 🌱 Karunya University Hackathon Project',
+                    url: shareUrl
+                });
+            } else {
+                copyDownloadLink();
+            }
+        }
+
+        function emailApp() {
+            const shareUrl = window.location.hostname === 'localhost' ? 
+                'https://hackathonecofert.karunya.com' : 
+                window.location.href;
+                
+            const subject = encodeURIComponent('Check out ECO Tracker - Hackathon EcoFert Project');
+            const body = encodeURIComponent(`Hi!\n\nI wanted to share this amazing hackathon project with you:\n\nECO Tracker - Transform your food waste into eco-friendly fertilizer\nKarunya University Hackathon Project\n\nCheck it out here: ${shareUrl}\n\nBest regards!`);
+            window.open(`mailto:?subject=${subject}&body=${body}`);
+        }
+
+        // Notifications
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 100px; right: 20px; z-index: 10000;
+                background: ${type === 'success' ? '#22c55e' : '#3b82f6'};
+                color: white; padding: 15px 20px; border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                animation: slideInRight 0.3s ease-out;
+            `;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => notification.remove(), 300);
+            }, 4000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createAppIcon();
+            createFeatureGraphic();
+            
+            // Generate QR code for store
+            if (typeof QRCode !== 'undefined') {
+                try {
+                    // Use production domain for QR code
+                    const qrUrl = window.location.hostname === 'localhost' ? 
+                        'https://hackathonecofert.karunya.com' : 
+                        window.location.href + '#download';
+                    
+                    new QRCode(document.getElementById('storeQrCode'), {
+                        text: qrUrl,
+                        width: 150,
+                        height: 150,
+                        colorDark: '#16a34a',
+                        colorLight: '#ffffff'
+                    });
+                } catch (error) {
+                    console.log('QR Code library not loaded');
+                }
+            }
+            
+            console.log('ECO Tracker Complete Website loaded successfully!');
+        });
+
+        // Add animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
